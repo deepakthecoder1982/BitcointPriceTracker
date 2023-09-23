@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HodInfo</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --blue: #007bff;
+        --indigo: #6610f2;
+        --purple: #6f42c1;
+        --pink: #e83e8c;
+        --red: #dc3545;
+        --orange: #fd7e14;
+        --yellow: #ffc107;
+        --green: #28a745;
+        --teal: #20c997;
+        --cyan: #17a2b8;
+        --white: #fff;
+        --gray: #6c757d;
+        --gray-dark: #343a40;
+        --primary: #007bff;
+        --secondary: #6c757d;
+        --success: #28a745;
+        --info: #17a2b8;
+        --warning: #ffc107;
+        --danger: #dc3545;
+        --light: #f8f9fa;
+        --dark: #020510e7;
+        --breakpoint-xs: 0;
+        --breakpoint-sm: 576px;
+        --breakpoint-md: 768px;
+        --breakpoint-lg: 992px;
+        --breakpoint-xl: 1200px;
+        --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+          "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+          "Noto Color Emoji";
+        --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+      }
+      body {
+        background-color: var(--dark);
+        color: var(--white);
+        font-family: var(--font-family-monospace);
+      }
+      .nav-container {
+        width: 95%;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 15px;
+        align-items: center;
+        margin: 5px auto 0;
+        text-align: center;
+        font-size: 90%;
+      }
+      .nav-container .logo {
+        width: 19%;
+      }
+      .nav-container .filter-by {
+        width: 16vw;
+        margin-left: 20px;
+      }
+      .nav-container .filter-by select {
+        width: 4vw;
+        border-radius: 5px;
+        text-align: center;
+        background-color: var(--gray-dark);
+        color: white;
+        font-size: 10px;
+        font-family: Oswald, serif;
+        border: none;
+        padding: 5px;
+      }
+
+      .nav-container .filter-by button {
+        width: 5vw;
+        border-radius: 5px;
+        text-align: center;
+        background-color: var(--gray-dark);
+        color: white;
+        font-size: 12px;
+        font-family: Oswald, serif;
+        border: none;
+        padding: 4px 2px;
+      }
+      .nav-container .tele-link {
+        display: flex;
+        width: 20%;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .nav-container .telegramButtonLink {
+        display: flex;
+        border: none;
+        color: white;
+        font-family: Oswald, serif;
+        background-color: rgb(16, 199, 199);
+        padding: 5px 10px;
+        width: 11vw;
+        justify-content: space-around;
+        align-items: center;
+        border-radius: 7px;
+        font-size: 0.9em;
+      }
+      .nav-container .telegramButtonLink img {
+        width: 10%;
+        height: 40%;
+      }
+      .nav-container .telegramButtonLink #darkmode {
+        width: 20%;
+        padding: 10px;
+      }
+      .show-price-trade-data {
+        display: flex;
+        justify-content: space-around;
+        width: 99%;
+        margin: 10px auto;
+        align-items: center;
+        text-align: center;
+        font-family: Oswald, sans-serif;
+        font-size: 87%;
+      }
+      .show-price-trade-data .show-price-left {
+        display: flex;
+        justify-content: space-around;
+        width: 30%;
+      }
+      .show-price-trade-data .percentage {
+        font-size: 1.8em;
+        color: rgb(24, 219, 219);
+      }
+      .show-price-trade-data .time {
+        color: var(--gray);
+      }
+      .show-price-trade-data .show-price-center {
+        width: 30%;
+      }
+      .show-price-trade-data .show-price-right {
+        width: 30%;
+      }
+      .show-price-trade-data .show-price-center #main-price-to-trade {
+        font-size: 4em;
+        color: white;
+        margin-bottom: 0.8rem;
+      }
+      .show-price-trade-data .show-price-center {
+        color: var(--gray);
+      }
+      .show-price-trade-data .show-price-center #title {
+        font-size: 1.44em;
+        font-weight: normal;
+      }
+      .show-price-trade-data .show-price-center #info {
+        font-size: 0.9em;
+      }
+      .show-price-trade-data .show-price-right {
+        width: 30%;
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .body-content {
+        width: 95%;
+        margin: 20px auto;
+        font-family: Oswald, sans-serif;
+        font-size: 1.2em;
+        text-align: center;
+      }
+
+      .body-content table {
+        text-align: center;
+        width: 100%;
+        margin: 7px auto;
+        border-collapse: separate;
+        border-spacing: 0 0.6em;
+      }
+      table tr,
+      td,
+      thead,
+      tbody {
+        padding: 8px 4px;
+        border: none;
+      }
+      table tbody td {
+        border: collapse;
+      }
+      th {
+        color: var(--gray);
+        font-weight: bold;
+        border: none;
+      }
+      .body-content table thead th {
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+      .body-content tbody .row {
+        background-color: rgba(128, 128, 128, 0.529);
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+          rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+          rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        transition: all 0.5s ease 0s;
+        background-color: #2e3241;
+      }
+      .body-content tbody .row:hover {
+        transform: scale(1.01);
+        box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px,
+          rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+          rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+        background-color: rgba(30, 143, 255, 0.33);
+        border: none;
+      }
+
+      .body-content .Platform {
+        display: flex;
+        width: 10vw;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+      }
+      .body-content .Platform img {
+        width: 1.4vw;
+        border-radius: 10px;
+        margin-right: 10px;
+      }
+
+      tbody .row td:nth-child(1) {
+        border-radius: 9px 0 0 9px;
+        padding-left: 10px;
+      }
+      tbody .row td:nth-last-child(1) {
+        border-radius: 0px 9px 9px 0px;
+      }
+      label {
+        position: relative;
+        width: 3.5vw;
+        height: 4vh;
+        display: block;
+        background: #2e3241;
+        border-radius: 100px;
+        cursor: pointer;
+        box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.3),
+          inset 0px -5px 15px rgba(255, 255, 255, 0.3);
+      }
+      label:after {
+        content: "";
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        background: var(--cyan);
+        border-radius: 100px;
+        top: 2px;
+        left: 2px;
+        transition: 0.5s;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      }
+      input:checked ~ label:after {
+        left:3.2vw;
+        transform: translateX(-100%);
+        background: linear-gradient(180deg, #777, #3a3a3a);
+      }
+      input:checked ~ label{
+        background: white;
+      }
+      input[type="checkbox"]{
+        display: none;
+      }
+      
+    </style>
+  </head>
+  <!-- jQuery CDN -->
+
+
+  <body>
+    <div class="container">
+      <div class="nav-container">
+        <div class="logo">
+          <img
+            src="https://hodlinfo.com/static/media/HODLINFO.8f78fc06.png"
+            alt="HODLINFO"
+            width="100%"
+          />
+        </div>
+        <div class="filter-by">
+          <select id="byCountry">
+            <option value="">INR</option>
+          </select>
+          <select id="byBitCoin">
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+            <option value="USDT">USDT</option>
+            <option value="XRP">XRP</option>
+            <option value="TRX">TRX</option>
+            <option value="DASH">DASH</option>
+            <option value="ZEC">ZEC</option>
+            <option value="XEM">XEM</option>
+            <option value="IOST">IOST</option>
+            <option value="WIN">WIN</option>
+            <option value="BIT">BIT</option>
+            <option value="WRX">WRX</option>
+          </select>
+          <button id="BuyBTC">BUY BTC</button>
+        </div>
+        <div class="tele-link">
+          <!-- <div class="progress-container">
+            <div class="chart" data-percent="50">
+                <span class="percent">50%</span>
+            </div> -->
+            <!-- <p class="countdown">58</p> -->
+            <div class="telegramButtonLink">
+            <p>Connect Telegram</p>
+          </div>
+          <input type="checkbox" id="darkmode" />
+          <label for="dark-mode" id="darkModebutton"></label>
+        </div>
+      </div>
+      <div class="show-price-trade-data">
+        <div class="show-price-left">
+          <div class="per-min">
+            <p class="percentage">0.13%</p>
+            <p class="time">5 Mins</p>
+          </div>
+          <div class="per-hour">
+            <p class="percentage">0.99%</p>
+            <p class="time">1 Hour</p>
+          </div>
+        </div>
+        <div class="show-price-center">
+          <h5 id="title">Best Price to Trade</h5>
+          <p id="main-price-to-trade">₹ 24,26,537</p>
+          <p id="info">Average BTC/INR net price including commission</p>
+        </div>
+        <div class="show-price-right">
+          <div class="per-day">
+            <p class="percentage">4.06%</p>
+            <p class="time">1 Day</p>
+          </div>
+          <div class="per-week">
+            <p class="percentage">10.53%</p>
+            <p class="time">7 Days</p>
+          </div>
+        </div>
+      </div>
+      <div class="body-content">
+        <table id="table">
+          <thead class="thead">
+            <tr>
+              <th>#</th>
+              <th>Platform</th>
+              <th>Last Traded Price</th>
+              <th>Buy/Sell Price</th>
+              <th>Difference</th>
+              <th>Savings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row">
+              <td class="serial-no"><p>1</p></td>
+              <td class="Platform">
+                <img
+                  src="./images//download.png"
+                  class="PlatformLogo"
+                  alt="WazirX"
+                />
+                <p class="platformName">WazirX</p>
+              </td>
+              <td class="last-trade-price">
+                <p>₹ 22,82,328</p>
+              </td>
+              <td class="buy-sell-price">
+                <p>₹ 22,82,327 / ₹ 22,87,000</p>
+              </td>
+              <td class="diff">
+                <p style="color: #da5757;">-5.56%</p>
+              </td>
+              <td class="savings" style="color:#da5757;">▼ ₹ 1,34,484</td>
+            </tr>
+            <tr class="row">
+              <td class="serial-no"><p>2</p></td>
+              <td class="Platform">
+                <img
+                  src="https://hodlinfo.com/static/media/bitbns.dcee6cf4.png"
+                  class="PlatformLogo"
+                  alt="WazirX"
+                />
+                <p class="platformName">Bitbns</p>
+              </td>
+              <td class="last-trade-price">
+                <p>₹ 29,33,719</p>
+              </td>
+              <td class="buy-sell-price">
+                <p>₹ 29,20,000 / ₹ 29,33,720</p>
+              </td>
+              <td class="diff">
+                <p style="color: #5dc7c2;">16.92 %</p>
+              </td>
+              <td class="savings" style="color: #5dc7c2;">▲ ₹ 4,24,568</td>
+            </tr>
+            <tr class="row">
+              <td class="serial-no"><p>3</p></td>
+              <td class="Platform">
+                <img
+                  src="./images/colodox.png"
+                  class="PlatformLogo"
+                  alt="WazirX"
+                />
+                <p class="platformName">Colodox</p>
+              </td>
+              <td class="last-trade-price">
+                <p>₹ 27,42,041</p>
+              </td>
+              <td class="buy-sell-price">
+                <p>₹ 22,36,336 / ₹ 27,42,041</p>
+              </td>
+              <td class="diff">
+                <p  style="color:#5dc7c2;;">9.28 %</p>
+              </td>
+              <td class="savings"  style="color:#5dc7c2;">▲ ₹ 2,32,890</td>
+            </tr>
+            <tr class="row">
+              <td class="serial-no"><p>4</p></td>
+              <td class="Platform">
+                <img
+                  src="./images/zebpay.png"
+                  class="PlatformLogo"
+                  alt="zebpay"
+                />
+                <p class="platformName">Zebpay</p>
+              </td>
+              <td class="last-trade-price">
+                <p>₹ 22,98,000</p>
+              </td>
+              <td class="buy-sell-price">
+                <p>₹ 22,98,000 / ₹ 22,62,000</p>
+              </td>
+              <td class="diff">
+                <p style="color:#da5757;" >-8.42 %</p>
+              </td>
+              <td class="savings"  style="color:#da5757;">▼ ₹ 2,11,151</td>
+            </tr>
+            <tr class="row">
+              <td class="serial-no"><p>5</p></td>
+              <td class="Platform">
+                <img
+                  src="https://hodlinfo.com/static/media/zebpay.232215c8.png"
+                  class="PlatformLogo"
+                  alt="WazirX"
+                />
+                <p class="platformName">CoinDCX</p>
+              </td>
+              <td class="last-trade-price">
+                <p>₹ 23,10,101</p>
+              </td>
+              <td class="buy-sell-price">
+                <p>₹ 23,10,101 / ₹ 23,36,853</p>
+              </td>
+              <td class="diff">
+                <!-- #5dc7c2; -->
+                <p style="color:#da5757;">-7.93 %</p>
+              </td>
+              <td class="savings" style="color:#da5757;">▼ ₹ 1,99,050</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+<!-- easyPieChart CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="/path/to/jquery.easy-pie-chart.js"></script>
+</html>
